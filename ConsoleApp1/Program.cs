@@ -1,25 +1,27 @@
-﻿using Aspose.Pdf;
+﻿enum VehicalType
+{
+    FourWheeler,
+    TwoWheeler
+}
+enum SloatType
+{
+    Medium,
+    Large
+}
+
+public Vehicle
+{
+    public string number {get;private set;}
+    public vehicalType type {get; private set;}
+    public vehicle(string number,VehicalType vehicalType){
+    this.number = number;
+    this.type = vehicalType;
+    }
+}
+
 internal class Program
 {
     public static void Main(string[] args)
     {
-        using (Document pdfDocument = new Document())
-        {
-            int i = 1;
-            foreach(var n in Directory.GetFiles(@"C:\Users\harsh\Desktop\Logs\Images"))
-            {
-            pdfDocument.Pages.Add();
-                Aspose.Pdf.Image image = new Aspose.Pdf.Image();
-
-                // Load sample BMP image file
-                image.File = n;
-                pdfDocument.Pages[i].Paragraphs.Add(image);
-                i++;
-            }
-            // Save output PDF document
-            pdfDocument.Save(@"C:\Users\harsh\Desktop\Logs\Images\marge.pdf");
-        }
-
-
     }
 }
