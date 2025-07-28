@@ -1,0 +1,25 @@
+WITH RankedDocuments AS (
+    SELECT 
+        jdm.JobId,
+        jdm.DocumentId,
+        jdm.DocumentDeliveryStatus,
+        ROW_NUMBER() OVER (PARTITION BY jdm.JobId ORDER BY jdm.DocumentId) AS rn
+    FROM dbo.JobDocumentMapping AS jdm
+    INNER JOIN dbo.JobMaster AS jm ON jm.JobId = jdm.JobId
+    WHERE 
+        jm.JobTypeId <> 5
+        AND jm.JobStatus IN (2, 5)
+        AND jm.DeliveryConfigJSON IS NOT NULL
+        AND jdm.DocumentDeliveryStatus = 1
+),
+JobCounts AS (
+    SELECT COUNT(DISTINCT JobId) AS JobCount FROM RankedDocuments
+),
+FinalSelection AS (
+    SELECT rd.*
+    FROM RankedDocuments rd
+    CROSS JOIN JobCounts jc
+    WHERE rd.rn <= CEILING(1000.0 / jc.JobCount)
+)
+SELECT TOP (1000) *
+FROM FinalSelection;
