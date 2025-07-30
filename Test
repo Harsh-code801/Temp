@@ -23,3 +23,18 @@ FinalSelection AS (
 )
 SELECT TOP (1000) *
 FROM FinalSelection;
+
+
+
+
+I need a message queue solution
+
+My situation
+I have multiple jobs task 
+Each job has separate queue 
+And job task message is publish in his queue 
+
+I required whenever i need to set priority at job level so that job task need to perform in priority. I need paus and resume funcunalitu at job level message shoud be persistent 
+I can set a prefatch count at entire queue level
+
+Provide me any tool suggestion to achive all mansion funcunality 
