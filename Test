@@ -1,4 +1,4 @@
-WITH RankedDocuments AS (
+WITH RankedDocuments AS (AIzaSyDEbebq6bU7DluMdof7mTQ2FTheXRU2B0o
     SELECT 
         jdm.JobId,
         jdm.DocumentId,
